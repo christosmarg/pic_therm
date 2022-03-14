@@ -34,9 +34,6 @@ static char	buf[BUFSIZ+1] = {0}; /* Generic buffer */
 static void
 ctx_main(void)
 {
-	/*lcd_cmd(LCD_CURS_ROW1);*/
-	/*lcd_puts("ID: 19390133");*/
-
 	lcd_cmd(LCD_CURS_ROW1);
 	lcd_puts("Temp: ");
 	print_tp(tp);

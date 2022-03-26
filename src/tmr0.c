@@ -70,7 +70,7 @@ tmr0_set_event(ev_handler handler, uint16_t rate)
 		r->handler = handler;
 		r->rate = rate;
 		r->cnt = 0;
-		return (1);
+		return (0);
 	}
-	return (0);
+	return (-1);
 }

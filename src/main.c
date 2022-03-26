@@ -112,11 +112,11 @@ void
 main(void)
 {
 	tmr0_init();
-	if (tmr0_set_event(&led_blink, 1000) < 0)
-		HANG("led_blink event failed");
-	if (tmr0_set_event(&button_debounce, 1) < 0)
-		HANG("button_debounce event failed");
 	lcd_init();
+	if (tmr0_set_event(&led_blink, 1000) < 0)
+		HANG("led_blink failed");
+	if (tmr0_set_event(&button_debounce, 1) < 0)
+		HANG("button_debounce failed");
 	i2c_init(I2C_MASTER, I2C_SLEW_OFF, I2C_CLK_1MHZ);
 	if (bme280_init() < 0)
 		HANG("BME280 error");

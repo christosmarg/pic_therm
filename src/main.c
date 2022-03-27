@@ -31,11 +31,6 @@ static char	buf[BUFSIZ+1] = {0}; /* Generic buffer */
 	lcd_puts(itoa(&buf[sizeof(buf)-1], v));	\
 } while (0)
 
-#define HANG(str) do {				\
-	lcd_puts(str);				\
-	for (;;);				\
-} while (0)
-
 static void
 ctx_main(void)
 {
@@ -113,13 +108,13 @@ main(void)
 {
 	tmr0_init();
 	lcd_init();
-	if (tmr0_set_event(&led_blink, 1000) < 0)
-		HANG("led_blink failed");
-	if (tmr0_set_event(&button_debounce, 1) < 0)
-		HANG("button_debounce failed");
+	tmr0_set_event(&led_blink, 1000);
+	tmr0_set_event(&button_debounce, 1);
 	i2c_init(I2C_MASTER, I2C_SLEW_OFF, I2C_CLK_1MHZ);
-	if (bme280_init() < 0)
-		HANG("BME280 error");
+	if (bme280_init() < 0) {
+		lcd_puts("BME280 error");
+		for (;;);
+	}
 
 	BTN_TRIS = INPUT;
 	LED_PORT = 1; /* LED on */

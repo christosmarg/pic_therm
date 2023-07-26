@@ -31,7 +31,8 @@ tmr0_isr(void) __interrupt
 		}
 	}
 	TMR0 = TMR0_DELAY;
-	INTCONbits.TMR0IF = 0; /* Clear interrupt flags */
+	/* Clear interrupt flags */
+	INTCONbits.TMR0IF = 0;
 }
 
 void
